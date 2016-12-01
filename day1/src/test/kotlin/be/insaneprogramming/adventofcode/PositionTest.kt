@@ -73,7 +73,7 @@ class PositionTest {
         val position = Position(startCoordinate, NORTH)
         val moves = getMoves(moveString)
         moves.forEach { position.move(it) }
-        assertThat(position.currentCoordinate.distanceFrom(startCoordinate)).isEqualTo(expectedLength)
+        assertThat(position.currentCoordinate.rectilinearDistanceFrom(startCoordinate)).isEqualTo(expectedLength)
     }
 
     private fun getMoves(moveString: String) = MoveParser().convertMoveInstructionsToList(moveString)

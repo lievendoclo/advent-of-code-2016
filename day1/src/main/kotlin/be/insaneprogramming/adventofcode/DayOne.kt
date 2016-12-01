@@ -9,7 +9,7 @@ class DayOne {
             val startCoordinate = Coordinate(0, 0)
             val position = Position(startCoordinate, NORTH)
             getMovesFromFile().forEach { position.move(it) }
-            println("Shortest distance to origin: " + position.currentCoordinate.distanceFrom(startCoordinate))
+            println("Shortest distance to origin: " + position.currentCoordinate.rectilinearDistanceFrom(startCoordinate))
         }
 
         private fun getMovesFromFile(): List<Move> {
