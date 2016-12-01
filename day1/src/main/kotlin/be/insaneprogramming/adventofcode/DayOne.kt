@@ -6,11 +6,16 @@ class DayOne {
     companion object {
         @JvmStatic
         fun main(args: Array<String>) {
-            val position = Position(0, 0, NORTH)
-            val moves = MoveParser().parseMoves(MoveParser::class.java.getResourceAsStream("moves.txt"))
-            position.move(moves)
-            val distance = position.currentDistanceFromOrigin()
-            println("Shortest distance to start position: " + distance)
+            val startCoordinate = Coordinate(0, 0)
+            val position = Position(startCoordinate, NORTH)
+            getMovesFromFile().forEach { position.move(it) }
+            println("Shortest distance to origin: " + position.currentCoordinate.distanceFrom(startCoordinate))
+        }
+
+        private fun getMovesFromFile(): List<Move> {
+            val moveInstructionLine = InputStreamLineReader(MoveParser::class.java.getResourceAsStream("moves.txt")).readFirstLine()
+            val moves = MoveParser().convertMoveInstructionsToList(moveInstructionLine)
+            return moves
         }
     }
 }

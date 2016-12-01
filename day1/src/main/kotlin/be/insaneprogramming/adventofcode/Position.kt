@@ -2,26 +2,22 @@ package be.insaneprogramming.adventofcode
 
 import be.insaneprogramming.adventofcode.Direction.*
 
-data class Position(var x: Int, var y: Int, var direction: Direction) {
-    fun move(moves:List<Move>) = moves.forEach { move(it) }
-
+data class Position(var currentCoordinate: Coordinate, var direction: Direction) {
     fun move(move:Move) {
-        changeDirection(move.turn)
-        walk(move.distance)
+        turn(move.turn)
+        walkInCurrentDirection(move.distance)
     }
 
-    fun changeDirection(turn: Turn) {
+    fun turn(turn: Turn) {
         direction = direction.turn(turn)
     }
 
-    fun walk(distance: Int) {
-        when(direction) {
-            NORTH -> y += distance
-            EAST -> x+= distance
-            SOUTH -> y -= distance
-            WEST -> x -= distance
+    fun walkInCurrentDirection(distance: Int) {
+        currentCoordinate = when(direction) {
+            NORTH -> currentCoordinate.copy(y = currentCoordinate.y + distance)
+            EAST -> currentCoordinate.copy(x = currentCoordinate.x + distance)
+            SOUTH -> currentCoordinate.copy(y = currentCoordinate.y - distance)
+            WEST -> currentCoordinate.copy(x = currentCoordinate.x - distance)
         }
     }
-
-    fun currentDistanceFromOrigin() : Int = Math.abs(x) + Math.abs(y)
 }

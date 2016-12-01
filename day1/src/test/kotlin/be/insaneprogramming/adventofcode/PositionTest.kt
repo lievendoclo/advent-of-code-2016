@@ -9,56 +9,56 @@ import org.junit.Test
 class PositionTest {
     @Test
     fun testTurnLeft() {
-        val position = Position(0, 0, NORTH)
-        position.changeDirection(LEFT)
+        val position = Position(Coordinate(0, 0), NORTH)
+        position.turn(LEFT)
         assertThat(position.direction).isEqualTo(WEST)
-        position.changeDirection(LEFT)
+        position.turn(LEFT)
         assertThat(position.direction).isEqualTo(SOUTH)
-        position.changeDirection(LEFT)
+        position.turn(LEFT)
         assertThat(position.direction).isEqualTo(EAST)
-        position.changeDirection(LEFT)
+        position.turn(LEFT)
         assertThat(position.direction).isEqualTo(NORTH)
     }
 
     @Test
     fun testTurnRight() {
-        val position = Position(0, 0, NORTH)
-        position.changeDirection(RIGHT)
+        val position = Position(Coordinate(0, 0), NORTH)
+        position.turn(RIGHT)
         assertThat(position.direction).isEqualTo(EAST)
-        position.changeDirection(RIGHT)
+        position.turn(RIGHT)
         assertThat(position.direction).isEqualTo(SOUTH)
-        position.changeDirection(RIGHT)
+        position.turn(RIGHT)
         assertThat(position.direction).isEqualTo(WEST)
-        position.changeDirection(RIGHT)
+        position.turn(RIGHT)
         assertThat(position.direction).isEqualTo(NORTH)
     }
 
     @Test
     fun testWalkNorth() {
-        val position = Position(0, 0, NORTH)
-        position.walk(10)
-        assertThat(position).isEqualTo(Position(0, 10, NORTH))
+        val position = Position(Coordinate(0, 0), NORTH)
+        position.walkInCurrentDirection(10)
+        assertThat(position).isEqualTo(Position(Coordinate(0, 10), NORTH))
     }
 
     @Test
     fun testWalkSouth() {
-        val position = Position(0, 0, SOUTH)
-        position.walk(10)
-        assertThat(position).isEqualTo(Position(0, -10, SOUTH))
+        val position = Position(Coordinate(0, 0), SOUTH)
+        position.walkInCurrentDirection(10)
+        assertThat(position).isEqualTo(Position(Coordinate(0, -10), SOUTH))
     }
 
     @Test
     fun testWalkEast() {
-        val position = Position(0, 0, EAST)
-        position.walk(10)
-        assertThat(position).isEqualTo(Position(10, 0, EAST))
+        val position = Position(Coordinate(0, 0), EAST)
+        position.walkInCurrentDirection(10)
+        assertThat(position).isEqualTo(Position(Coordinate(10, 0), EAST))
     }
 
     @Test
     fun testWalkWest() {
-        val position = Position(0, 0, WEST)
-        position.walk(10)
-        assertThat(position).isEqualTo(Position(-10, 0, WEST))
+        val position = Position(Coordinate(0, 0), WEST)
+        position.walkInCurrentDirection(10)
+        assertThat(position).isEqualTo(Position(Coordinate(-10, 0), WEST))
     }
 
     @Test
@@ -69,10 +69,11 @@ class PositionTest {
     }
 
     private fun assertDistanceFromOriginAfterMoves(moveString: String, expectedLength: Int) {
-        val position = Position(0, 0, NORTH)
+        val startCoordinate = Coordinate(0, 0)
+        val position = Position(startCoordinate, NORTH)
         val moves = getMoves(moveString)
-        position.move(moves)
-        assertThat(position.currentDistanceFromOrigin()).isEqualTo(expectedLength)
+        moves.forEach { position.move(it) }
+        assertThat(position.currentCoordinate.distanceFrom(startCoordinate)).isEqualTo(expectedLength)
     }
 
     private fun getMoves(moveString: String) = MoveParser().convertMoveInstructionsToList(moveString)
