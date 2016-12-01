@@ -7,7 +7,7 @@ class DayOne {
         @JvmStatic
         fun main(args: Array<String>) {
             val position = Position(0, 0, NORTH)
-            val moves = MoveParser().parseMoves(MoveParser::class.javagi.getResourceAsStream("moves.txt"))
+            val moves = MoveParser().parseMoves(MoveParser::class.java.getResourceAsStream("moves.txt"))
             position.move(moves)
             val distance = position.currentDistanceFromOrigin()
             println("Shortest distance to start position: " + distance)
