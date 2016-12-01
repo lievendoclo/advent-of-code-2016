@@ -3,9 +3,7 @@ package be.insaneprogramming.adventofcode
 import be.insaneprogramming.adventofcode.Direction.*
 
 data class Position(var x: Int, var y: Int, var direction: Direction) {
-    fun move(moves:List<Move>) {
-        moves.forEach { move(it) }
-    }
+    fun move(moves:List<Move>) = moves.forEach { move(it) }
 
     fun move(move:Move) {
         changeDirection(move.turn)
