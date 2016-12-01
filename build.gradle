@@ -1,0 +1,27 @@
+buildscript {
+	ext.kotlin_version = '1.1-M02'
+
+	repositories {
+		jcenter()
+		maven { url = 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
+	}
+
+	dependencies {
+		classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+	}
+}
+
+subprojects {
+	apply plugin: "kotlin"
+
+	repositories {
+		jcenter()
+		maven { url = 'https://dl.bintray.com/kotlin/kotlin-eap-1.1' }
+	}
+
+	dependencies {
+		compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+		compile "org.assertj:assertj-core:3.6.1"
+		testCompile 'junit:junit:4.12'
+	}
+}
