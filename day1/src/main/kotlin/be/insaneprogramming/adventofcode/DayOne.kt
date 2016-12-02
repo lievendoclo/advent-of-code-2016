@@ -10,8 +10,8 @@ class DayOne {
             val startCoordinate = Coordinate(0, 0)
             val traveler = Traveler(Position(startCoordinate, NORTH))
             traveler.travel(moveInstructions)
-            println("Shortest distance to origin: " + traveler.position.currentCoordinate.rectilinearDistanceFrom(startCoordinate))
-            println("Shortest distance from origin to first crossing: " + traveler.getCrossings().first().rectilinearDistanceFrom(startCoordinate))
+            println("Shortest distance to origin: " + traveler.position.currentCoordinate.calculateRectilinearDistanceFrom(startCoordinate))
+            println("Shortest distance from origin to first crossing: " + traveler.getCrossings().first().calculateRectilinearDistanceFrom(startCoordinate))
 
         }
     }

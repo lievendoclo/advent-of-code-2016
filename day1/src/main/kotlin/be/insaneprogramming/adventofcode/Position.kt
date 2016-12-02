@@ -6,26 +6,26 @@ data class Position(var currentCoordinate: Coordinate, var direction: Direction,
     fun move(move:Move) {
         turn(move.turn)
         for(i in 1..move.distance)
-            walkAndKeepTrack()
+            walkOneBlockAndKeepTrack()
     }
 
     fun turn(turn: Turn) {
         direction = direction.turn(turn)
     }
 
-    fun walkAndKeepTrack(distance : Int = 1) {
-        walk(distance)
+    fun walkOneBlockAndKeepTrack() {
+        walkOneBlock()
         savePosition()
     }
 
     private fun savePosition() = history.add(currentCoordinate)
 
-    private fun walk(distance: Int) {
+    private fun walkOneBlock() {
         currentCoordinate = when (direction) {
-            NORTH -> currentCoordinate.copy(y = currentCoordinate.y + distance)
-            EAST -> currentCoordinate.copy(x = currentCoordinate.x + distance)
-            SOUTH -> currentCoordinate.copy(y = currentCoordinate.y - distance)
-            WEST -> currentCoordinate.copy(x = currentCoordinate.x - distance)
+            NORTH -> currentCoordinate.copy(y = currentCoordinate.y + 1)
+            EAST -> currentCoordinate.copy(x = currentCoordinate.x + 1)
+            SOUTH -> currentCoordinate.copy(y = currentCoordinate.y - 1)
+            WEST -> currentCoordinate.copy(x = currentCoordinate.x - 1)
         }
     }
 }
