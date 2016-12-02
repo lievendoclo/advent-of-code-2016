@@ -12,19 +12,17 @@ class Keypad(layout: String, var currentCoordinate: Coordinate) {
         height = layoutLines.size
     }
 
-    fun getCurrentKey() : String {
-        return getKeyAtCoordinate(currentCoordinate)
-    }
+    fun getCurrentKey() = getKeyAtCoordinate(currentCoordinate)
 
-    fun getKeyAtCoordinate(coordinate: Coordinate) : String {
-        return layoutLines.get(coordinate.y).substring(coordinate.x, coordinate.x + 1)
-    }
+    fun getKeyAtCoordinate(coordinate: Coordinate) = layoutLines.get(coordinate.y).substring(coordinate.x, coordinate.x + 1)
 
-    fun moveUp() {
-        val targetCoordinate = getTargetCoordinate(0, -1)
-        currentCoordinate = if(getKeyAtCoordinate(targetCoordinate).isBlank()) currentCoordinate else targetCoordinate
+    fun moveUp() = updateCoordinateIfValid(0, -1)
 
-    }
+    fun moveDown() = updateCoordinateIfValid(0, 1)
+
+    fun moveLeft() = updateCoordinateIfValid(-1, 0)
+
+    fun moveRight() = updateCoordinateIfValid(1, 0)
 
     private fun getTargetCoordinate(dX: Int, dY: Int): Coordinate {
         var targetX = if(currentCoordinate.x + dX < 0) 0 else currentCoordinate.x + dX
@@ -34,20 +32,8 @@ class Keypad(layout: String, var currentCoordinate: Coordinate) {
         return Coordinate(targetX, targetY)
     }
 
-    fun moveDown() {
-        val targetCoordinate = getTargetCoordinate(0, 1)
-        currentCoordinate = if(getKeyAtCoordinate(targetCoordinate).isBlank()) currentCoordinate else targetCoordinate
+    private fun updateCoordinateIfValid(dX: Int, dY: Int) {
+        val targetCoordinate = getTargetCoordinate(dX, dY)
+        currentCoordinate = if (getKeyAtCoordinate(targetCoordinate).isBlank()) currentCoordinate else targetCoordinate
     }
-
-    fun moveLeft() {
-        val targetCoordinate = getTargetCoordinate(-1, 0)
-        currentCoordinate = if(getKeyAtCoordinate(targetCoordinate).isBlank()) currentCoordinate else targetCoordinate
-    }
-
-    fun moveRight() {
-        val targetCoordinate = getTargetCoordinate(1, 0)
-        currentCoordinate = if(getKeyAtCoordinate(targetCoordinate).isBlank()) currentCoordinate else targetCoordinate
-
-    }
-
 }

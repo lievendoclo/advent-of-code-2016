@@ -10,7 +10,7 @@ class DayTwo {
 
             println("With standard keypad")
             keypadLayout = "123\n456\n789"
-            keypad = Keypad(keypadLayout, Coordinate(0, 2))
+            keypad = Keypad(keypadLayout, Coordinate(1, 1))
             val movesFromFile = getMovesFromFile()
             for(movesList in movesFromFile) {
                 for(move in movesList) {
