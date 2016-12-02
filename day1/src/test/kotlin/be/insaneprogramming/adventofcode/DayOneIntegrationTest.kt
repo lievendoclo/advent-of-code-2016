@@ -10,7 +10,7 @@ class DayOneIntegrationTest : Test({
         val traveler = Traveler(Position(start, Direction.NORTH))
         traveler.travel("R2, L3")
 
-        test("I expect to be 5 blocks away") {
+        test("I expect to be 5 blocks away from where I started") {
             assertThat(traveler.position.currentCoordinate.calculateRectilinearDistanceFrom(start)).isEqualTo(5)
         }
     }
@@ -19,7 +19,7 @@ class DayOneIntegrationTest : Test({
         val traveler = Traveler(Position(start, Direction.NORTH))
         traveler.travel("R2, R2, R2")
 
-        test("I expect to be 2 blocks away") {
+        test("I expect to be 2 blocks away from where I started") {
             assertThat(traveler.position.currentCoordinate.calculateRectilinearDistanceFrom(start)).isEqualTo(2)
         }
     }
@@ -28,7 +28,7 @@ class DayOneIntegrationTest : Test({
         val traveler = Traveler(Position(start, Direction.NORTH))
         traveler.travel("R2, R2, R2")
 
-        test("I expect to be 2 blocks away") {
+        test("I expect to be 2 blocks away from where I started") {
             assertThat(traveler.position.currentCoordinate.calculateRectilinearDistanceFrom(start)).isEqualTo(2)
         }
     }
@@ -37,7 +37,7 @@ class DayOneIntegrationTest : Test({
         val traveler = Traveler(Position(start, Direction.NORTH))
         traveler.travel("R8, R4, R4, R8")
 
-        test("I expect the first coordinate where my paths cross to be 4 blocks away") {
+        test("I expect the first place where my paths cross to be 4 blocks away from where I started") {
             assertThat(traveler.getCrossings().first().calculateRectilinearDistanceFrom(start)).isEqualTo(4)
         }
     }
