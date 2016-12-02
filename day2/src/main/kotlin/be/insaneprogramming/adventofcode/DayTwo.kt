@@ -6,23 +6,27 @@ class DayTwo {
         @JvmStatic
         fun main(args: Array<String>) {
             var keypad : Keypad
+            var keypadLayout : String
+
             println("With standard keypad")
-            keypad = StandardKeypad(5)
+            keypadLayout = "123\n456\n789"
+            keypad = Keypad(keypadLayout, Coordinate(0, 2))
             val movesFromFile = getMovesFromFile()
             for(movesList in movesFromFile) {
                 for(move in movesList) {
                     move.direction.apply(keypad)
                 }
-                print(keypad.currentKey)
+                print(keypad.getCurrentKey())
             }
             println()
             println("With diamond keypad")
-            keypad = DiamondKeypad("5")
+            keypadLayout = "  1  \n 234 \n56789\n ABC \n  D  "
+            keypad = Keypad(keypadLayout, Coordinate(0, 2))
             for(movesList in movesFromFile) {
                 for(move in movesList) {
                     move.direction.apply(keypad)
                 }
-                print(keypad.currentKey)
+                print(keypad.getCurrentKey())
             }
         }
 
