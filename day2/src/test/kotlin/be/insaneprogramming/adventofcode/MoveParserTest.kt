@@ -8,8 +8,8 @@ class MoveParserTest {
     fun shouldParseMoveInstructions() {
         val parser = MoveParser()
         val moveInstruction = "UUDLR"
-        val moves = parser.convertMoveInstructionsToList(moveInstruction)
+        val moves = parser.convertLinesToMoves(listOf(moveInstruction))
         assertThat(moves).hasSize(5)
-        assertThat(moves).containsExactlyInAnyOrder(Move(Direction.UP), Move(Direction.UP), Move(Direction.DOWN), Move(Direction.LEFT), Move(Direction.RIGHT))
+        assertThat(moves).containsExactlyInAnyOrder(listOf(Move(Direction.UP), Move(Direction.UP), Move(Direction.DOWN), Move(Direction.LEFT), Move(Direction.RIGHT)))
     }
 }

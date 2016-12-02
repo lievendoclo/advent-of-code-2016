@@ -1,7 +1,9 @@
 package be.insaneprogramming.adventofcode
 
 class MoveParser {
-    fun convertMoveInstructionsToList(line: String): List<Move> = getIndividualMoveInstructions(line).map { Move(getDirectionFromMoveString(it)) }
+    fun convertLinesToMoves(lines: List<String>) = lines.map { convertMoveInstructionsToList(it) }
+
+    private fun convertMoveInstructionsToList(line: String): List<Move> = getIndividualMoveInstructions(line).map { Move(getDirectionFromMoveString(it)) }
 
     private fun getIndividualMoveInstructions(line: String) = line.split("").filter { it.isNotBlank() }
 

@@ -6,40 +6,25 @@ class DayTwo {
         @JvmStatic
         fun main(args: Array<String>) {
             var keypad : Keypad
-            var keypadLayout : String
+            var codeSolver: CodeSolver
+            val movesFromFile = getContentFromFile()
 
             println("With standard keypad")
-            keypadLayout = "123\n456\n789"
-            keypad = Keypad(keypadLayout, Coordinate(1, 1))
-            val movesFromFile = getMovesFromFile()
-            for(movesList in movesFromFile) {
-                for(move in movesList) {
-                    move.direction.apply(keypad)
-                }
-                print(keypad.getCurrentKey())
-            }
-            println()
+            keypad = Keypad("123\n456\n789")
+            codeSolver = CodeSolver(keypad)
+            codeSolver.startAt(Coordinate(1, 1))
+            println(codeSolver.getCode(movesFromFile))
+
             println("With diamond keypad")
-            keypadLayout = "  1  \n 234 \n56789\n ABC \n  D  "
-            keypad = Keypad(keypadLayout, Coordinate(0, 2))
-            for(movesList in movesFromFile) {
-                for(move in movesList) {
-                    move.direction.apply(keypad)
-                }
-                print(keypad.getCurrentKey())
-            }
+            keypad = Keypad("  1  \n 234 \n56789\n ABC \n  D  ")
+            codeSolver = CodeSolver(keypad)
+            codeSolver.startAt(Coordinate(0, 2))
+            println(codeSolver.getCode(movesFromFile))
         }
 
-        private fun getMovesFromFile(): List<List<Move>> {
-            val reader = InputStreamLineReader(MoveParser::class.java.getResourceAsStream("input.txt"))
-            val movesList : MutableList<List<Move>> = mutableListOf()
-            var moveInstructionLine = reader.readLine()
-            while(moveInstructionLine?.isNotBlank() ?: false) {
-                val moves = MoveParser().convertMoveInstructionsToList(moveInstructionLine!!)
-                movesList.add(moves)
-                moveInstructionLine = reader.readLine()
-            }
-            return movesList
+        private fun getContentFromFile(): String {
+            val reader = InputStreamReader(MoveParser::class.java.getResourceAsStream("input.txt"))
+            return reader.readAll()
         }
     }
 }

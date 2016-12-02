@@ -1,7 +1,7 @@
 package be.insaneprogramming.adventofcode
 
 
-class Keypad(layout: String, var currentCoordinate: Coordinate) {
+class Keypad(layout: String, var currentCoordinate: Coordinate? = null) {
     val layoutLines: List<String>
     val height : Int
     val width: Int
@@ -12,7 +12,7 @@ class Keypad(layout: String, var currentCoordinate: Coordinate) {
         height = layoutLines.size
     }
 
-    fun getCurrentKey() = getKeyAtCoordinate(currentCoordinate)
+    fun getCurrentKey() = getKeyAtCoordinate(currentCoordinate!!)
 
     fun getKeyAtCoordinate(coordinate: Coordinate) = layoutLines.get(coordinate.y).substring(coordinate.x, coordinate.x + 1)
 
@@ -25,11 +25,13 @@ class Keypad(layout: String, var currentCoordinate: Coordinate) {
     fun moveRight() = updateCoordinateIfValid(1, 0)
 
     private fun getTargetCoordinate(dX: Int, dY: Int): Coordinate {
-        var targetX = if(currentCoordinate.x + dX < 0) 0 else currentCoordinate.x + dX
-        targetX = if(targetX > height - 1) height - 1 else targetX
-        var targetY = if(currentCoordinate.y + dY < 0) 0 else currentCoordinate.y + dY
-        targetY = if(targetY > width - 1) width - 1 else targetY
+        val targetX = if(isWithinRange(currentCoordinate!!.x + dX, 0, width - 1)) currentCoordinate!!.x else currentCoordinate!!.x + dX
+        val targetY = if(isWithinRange(currentCoordinate!!.y + dY, 0, height - 1)) currentCoordinate!!.y else currentCoordinate!!.y + dY
         return Coordinate(targetX, targetY)
+    }
+
+    private fun isWithinRange(value: Int, min: Int, max: Int) : Boolean {
+        return value < min || value > max
     }
 
     private fun updateCoordinateIfValid(dX: Int, dY: Int) {
