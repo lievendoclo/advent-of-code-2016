@@ -23,5 +23,7 @@ subprojects {
 		compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
 		compile "org.assertj:assertj-core:3.6.1"
 		testCompile 'junit:junit:4.12'
+		testCompile "io.damo.aspen:aspen:2.0.0"
+
 	}
 }

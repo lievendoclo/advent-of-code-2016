@@ -10,6 +10,8 @@ class DayOne {
             val position = Position(startCoordinate, NORTH)
             getMovesFromFile().forEach { position.move(it) }
             println("Shortest distance to origin: " + position.currentCoordinate.rectilinearDistanceFrom(startCoordinate))
+            println("Shortest distance from origin to coordinate visited twice first: " + position.firstDoubleCoordinate.rectilinearDistanceFrom(startCoordinate))
+
         }
 
         private fun getMovesFromFile(): List<Move> {

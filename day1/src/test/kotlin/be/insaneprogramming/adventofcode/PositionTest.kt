@@ -60,21 +60,4 @@ class PositionTest {
         position.walkInCurrentDirection(10)
         assertThat(position).isEqualTo(Position(Coordinate(-10, 0), WEST))
     }
-
-    @Test
-    fun testMoves() {
-        assertDistanceFromOriginAfterMoves("R2, L3", 5)
-        assertDistanceFromOriginAfterMoves("R2, R2, R2", 2)
-        assertDistanceFromOriginAfterMoves("R5, L5, R5, R3", 12)
-    }
-
-    private fun assertDistanceFromOriginAfterMoves(moveString: String, expectedLength: Int) {
-        val startCoordinate = Coordinate(0, 0)
-        val position = Position(startCoordinate, NORTH)
-        val moves = getMoves(moveString)
-        moves.forEach { position.move(it) }
-        assertThat(position.currentCoordinate.rectilinearDistanceFrom(startCoordinate)).isEqualTo(expectedLength)
-    }
-
-    private fun getMoves(moveString: String) = MoveParser().convertMoveInstructionsToList(moveString)
 }
