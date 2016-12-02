@@ -4,7 +4,7 @@ import io.damo.aspen.Test
 import org.assertj.core.api.Assertions.assertThat
 
 class DayTwoIntegrationTest : Test({
-    describe("When I move have instructions ULL RRDDD LURDL UUUUD with a standard keypad") {
+    describe("When I have instructions ULL RRDDD LURDL UUUUD with a standard keypad") {
         val keypadLayout : String = "123\n456\n789"
         val keypad = Keypad(keypadLayout)
         val solver = CodeSolver(keypad)
@@ -16,7 +16,7 @@ class DayTwoIntegrationTest : Test({
         }
     }
 
-    describe("When I move have instructions ULL RRDDD LURDL UUUUD with a diamond keypad") {
+    describe("When I have instructions ULL RRDDD LURDL UUUUD with a diamond keypad") {
         val keypadLayout : String = "  1  \n 234 \n56789\n ABC \n  D  "
         val keypad = Keypad(keypadLayout)
         val solver = CodeSolver(keypad)
