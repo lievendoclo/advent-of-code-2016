@@ -1,10 +1,11 @@
 package be.insaneprogramming.adventofcode
 
 
-class Keypad(layout: String, var currentCoordinate: Coordinate? = null) {
+class Keypad(layout: String) {
     val layoutLines: List<String>
     val height : Int
     val width: Int
+    var currentCoordinate: Coordinate? = null
 
     init {
         layoutLines = layout.split("\n")
